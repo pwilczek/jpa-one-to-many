@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class ExceptionGroup implements Serializable{
+public class ExceptionGroup implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
@@ -22,7 +22,7 @@ public class ExceptionGroup implements Serializable{
     @OneToMany
     @JoinColumns({
             @JoinColumn(name = "system", referencedColumnName = "system"),
-            @JoinColumn(name = "code", referencedColumnName = "code")
+            @JoinColumn(name = "code", referencedColumnName = "code"),
     })
     Set<Exception> exceptions = new HashSet();
 
@@ -39,6 +39,7 @@ public class ExceptionGroup implements Serializable{
         this.code = code;
     }
 
-    public ExceptionGroup() {}
+    public ExceptionGroup() {
+    }
 
 }

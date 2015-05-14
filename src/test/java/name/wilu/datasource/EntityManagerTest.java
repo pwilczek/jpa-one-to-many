@@ -29,19 +29,28 @@ public class EntityManagerTest {
     @Test
     @Transactional
     @Rollback(false)
-    public void shouldAdd(){
+    public void shouldAdd() {
         Exception first = new Exception("system", "code", true);
-        ExceptionGroup group = new ExceptionGroup("system", "code");
+        ExceptionGroup group = new ExceptionGroup("other-system", "other-code");
         group.add(first);
         em.persist(first);
         em.persist(group);
         assertNotNull(em);
     }
 
+    @Ignore
     @Test
     @Transactional
-    public void shouldFind(){
-        ExceptionGroup group = em.find(ExceptionGroup.class, 7L);
-        assertTrue(group.exceptions().size()==4);
+    public void shouldFindByGroup() {
+        ExceptionGroup group = em.find(ExceptionGroup.class, 12L);
+        assertTrue(group.exceptions().size() == 1);
     }
+
+    @Test
+    @Transactional
+    public void shouldFindByException(){
+        Exception exception = em.find(Exception.class, 9L);
+        assertNotNull(exception.group());
+    }
+
 }

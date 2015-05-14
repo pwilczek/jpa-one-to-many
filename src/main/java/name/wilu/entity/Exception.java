@@ -1,9 +1,6 @@
 package name.wilu.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Exception {
@@ -15,6 +12,9 @@ public class Exception {
     @Column(name = "system") private String system;
     @Column(name = "code") private String code;
 
+    @ManyToOne
+    private ExceptionGroup group;
+
     private boolean active;
 
     public Exception(String system, String code, boolean active) {
@@ -24,4 +24,8 @@ public class Exception {
     }
 
     public Exception() {}
+
+    public ExceptionGroup group() {
+        return group;
+    }
 }
